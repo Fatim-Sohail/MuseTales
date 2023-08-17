@@ -6,16 +6,10 @@
 .pnp.js
 
 # Temporary
-/src/Pages
 
 
 # testing
 /coverage
-
-# files 
-/src/Reducers
-/src/Actions
-/src/Api
 
 # production
 /build
