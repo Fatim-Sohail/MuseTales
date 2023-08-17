@@ -5,6 +5,13 @@
 /.pnp
 .pnp.js
 
+# Temporary
+/src/Pages
+/src/Api
+/src/Actions
+/src/Reducers
+/src/Redux
+
 # testing
 /coverage
 

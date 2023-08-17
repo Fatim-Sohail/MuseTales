@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Auth from "./Pages/Auth/Auth";
+import Home from "./Pages/Home";
 import { getPosts } from './Actions/Posts';
 import { useDispatch } from 'react-redux';
 
@@ -15,8 +16,7 @@ function App() {
 
   return (
     <>
-      <Header />
-      <h1>APP</h1>
+      <Home/>
       <Routes>
         <Route path="/auth" element={<Auth />} />
       </Routes>
