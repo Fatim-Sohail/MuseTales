@@ -1,6 +1,13 @@
 import { applyMiddleware, compose } from "redux";
-import { createStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import thunk from "redux-thunk";
-import Reducers from "../Reducers";
+import posts from "../Reducers/posts";
 
-export const store = createStore(Reducers, compose(applyMiddleware(thunk)));
+const middleware = [thunk];
+
+export const store = configureStore({
+  reducer: {
+    posts
+  },
+  middleware: middleware
+});

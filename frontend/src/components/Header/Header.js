@@ -13,7 +13,7 @@ const Header = () => {
     <>
       <header class="site-header">
         <div className="container">
-          <div class="site-identity">
+          <div className="site-identity">
             {/* <a href="#">
             <img src="https://i.pinimg.com/originals/bd/dc/7a/bddc7a3648d204bf082470d45112f0da.gif" alt="Site Name" />
           </a> */}
@@ -21,8 +21,8 @@ const Header = () => {
               <a href="#">MuseTales</a>
             </h1>
           </div>
-          <nav class="site-navigation">
-            <ul class="nav">
+          <nav className="site-navigation">
+            <ul className="nav">
               <li>
                 <a href="#"><BsSearch className="story"/> Search</a>
               </li>
