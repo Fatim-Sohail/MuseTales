@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
   background: {
     position: 'fixed',
-    top: 0,
-    left: 0,
+    // top: 0,
+    // left: 0,
     width: '100%',
     height: '100%',
     background: 'linear-gradient(135deg, #503dbe, #812399)',
@@ -18,8 +18,7 @@ export default makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    marginTop: '4.5%',
-    // maxWidth: '80%',
+    // marginTop: '4.5%',
     marginRight: '15%',
     marginLeft: '15%',
   },
