@@ -6,6 +6,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { BsBookmarks } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
+// import CreateBlog from "../../Pages/CreateBlog/CreateBlog";
 
 const Header = () => {
   const user = true;
@@ -24,6 +25,7 @@ const Header = () => {
           {user ? (
             <div className="auth_options">
               <Link className="addStory-link" to="/createblog">
+              {/* <CreateBlog currentId={currentId} setCurrentId={setCurrentId} /> */}
                 <RiPencilFill /> Add Tale
               </Link>
 
@@ -55,14 +57,4 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-  /* <Container maxwidth="lg">
-  <AppBar position="static" color="inherit">
-    <Typography variant="h2" align="centre">MuseTales</Typography>
-    <img src='https://i.pinimg.com/originals/bd/dc/7a/bddc7a3648d204bf082470d45112f0da.gif' alt="museTales" height="60"/>
-  </AppBar>
-
-</Container> */
 
