@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, AppBar, Typography, Grow, Grid} from '@material-ui/core';
+import { Container, Grow, Grid} from '@material-ui/core';
 import Header from '../components/Header/Header';
 import Posts from './Posts/Posts';
 import CreateBlog from './CreateBlog/CreateBlog';
@@ -21,11 +21,10 @@ const Home = () => {
         <Header/>
         <Grow in>
             <Container>
-                <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-                    <Grid item xs={12} sm={7}>
+                <Grid container justify="space-around" alignItems="stretch" spacing={3}>
+                    <Grid item xs={12} sm={11} alignItems="center">
                         <Posts setCurrentId={setCurrentId} />
                     </Grid>
-                    {/* <AddStory/> */}
                     <CreateBlog currentId={currentId} setCurrentId={setCurrentId} />
                 </Grid>
             </Container>
