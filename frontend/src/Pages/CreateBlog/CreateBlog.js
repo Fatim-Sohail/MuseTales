@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import useStyles from './CreateBlogStyle.js';
 import { createPosts, updatePost } from '../../Actions/posts.js';
-import { Link } from 'react-router-dom';
-import SvgComponent from '../../components/Background/SvgComponent.js';
+// import { Link } from 'react-router-dom';
 
 const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });

@@ -4,7 +4,7 @@ import Posts from './Posts/Posts';
 import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getPosts } from '../Actions/posts';
-import CreateBlog from './CreateBlog/CreateBlog';
+// import CreateBlog from './CreateBlog/CreateBlog';
 
 const Home = () => {
     const [currentId, setCurrentId] = useState(0);

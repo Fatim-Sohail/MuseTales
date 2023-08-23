@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // import CreateBlog from "../../Pages/CreateBlog/CreateBlog";
 
 const Header = () => {
-  const user = true;
+  const user = null;
 
   return (
     <header>
@@ -45,8 +45,8 @@ const Header = () => {
             </div>
           ) : (
             <div className="noAuth_options">
-              <Link className="login-link" to="/login">
-                Login
+              <Link className="login-link" to="/auth">
+                Sign In
               </Link>
             </div>
           )}

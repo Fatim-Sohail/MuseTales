@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Grenze+Gotisch:wght@400;600&family=Italiana&family=ZCOOL+QingKe+HuangYou&display=swap');
 
-
-
 header {
   top: -100px;
   color: #fff;
@@ -61,6 +59,7 @@ strong {
   transition: color 0.3s ease;
   font-size: 20px;
   padding: 18px 0;
+  font-family: Exo;
 }
 
 .readList-link {
@@ -68,8 +67,8 @@ strong {
 }
 
 .addStory-link {
-  border: #fff 0.5px solid;
-  padding: 3px 10px;
+  border: #fff 1px solid;
+  padding: 4px 10px;
   border-radius: 10px;
 }
 
@@ -109,26 +108,33 @@ strong {
 }
 
 .logout-btn:hover {
-  color: #ff5722;
+  color: #e99f31;
 }
 
 /* No Auth Options */
 .noAuth_options {
   display: flex;
   align-items: center;
+  padding: 15px 10px;
 }
 
-.login-link,
-.register-link {
+.login-link {
   text-decoration: none;
   color: #fff;
-  margin-right: 20px;
+  margin-right: 40px;
   transition: color 0.3s ease;
+  font-size: 20px;  
+  border: #fff 1px solid;
+  padding: 3px 12px;
+  border-radius: 10px;
+  font-family: Exo;
 }
 
-.login-link:hover,
-.register-link:hover {
-  color: #ff5722;
+.login-link:hover {
+  border: #e99f31 1px solid;
+  background-color: #e99f31;
+  color: #812399;
+  font-size: 21px;
 }
 
 
