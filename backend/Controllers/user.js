@@ -16,6 +16,7 @@ export const signin = async (req, res) => {
 
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, 'test', { expiresIn: "1hr"});
 
+        console.log("backend... token");
         res.status(200).json({ result: existingUser, token});
     } catch (error) {
         res.status(500).json({ message: 'Oops! Something went wrong.'});
@@ -35,7 +36,7 @@ export const signup = async (req, res) => {
         const result = await User.create({ email, password: hashedPassword, name: `${fullName}`, interests: `${interests}`, education: `${education }` });
 
         const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: "1hr"});
-
+        console.log("backend... token");
         res.status(200).json({ result, token});
     } catch (error) {
         res.status(500).json({ message: 'Oops! Something went wrong.'});

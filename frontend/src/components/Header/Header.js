@@ -16,16 +16,18 @@ const Header = () => {
   const history = useNavigate();
   const location = useLocation();
   // const user = true;
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [profilePopupOpen, setProfilePopupOpen] = useState(false);
-  console.log(user);
+  console.log("Header user", user);
 
     const userToken = localStorage.getItem("Token");
+    // console.log("User Token", userToken);
+    // change token on line 27 to Token if split error not resolved in middleware...
   useEffect(() => {
     const token = user?.token;
-    setUser(JSON.parse(localStorage.getItem("profile")));
+    setUser(JSON.parse(localStorage.getItem('profile')));
   }, [location]);
-
+  
   const handleProfilePopupOpen = () => {
     setProfilePopupOpen(true);
   };

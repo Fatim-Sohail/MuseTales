@@ -13,6 +13,7 @@ const CreateBlog = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
+  console.log(user);
 
   // useEffect(() => {
   //   if (post) setPostData(post);

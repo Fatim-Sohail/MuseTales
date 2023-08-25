@@ -3,7 +3,7 @@ import Icon from "./Icon.js";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { InputAdornment, IconButton, Button } from "@material-ui/core";
@@ -47,23 +47,23 @@ const Auth = () =>  {
     setFormData({ ...formData, [e.target.name] : e.target.value })
   };
 
-  const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
-    console.log(res);
+  // const googleSuccess = async (res) => {
+  //   const result = res?.profileObj;
+  //   const token = res?.tokenId;
+  //   console.log(res);
 
-    try {
-      dispatch({ type: "AUTH", data: { result, token } });
-      history.push("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     dispatch({ type: "AUTH", data: { result, token } });
+  //     history.push("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const googleFailure = (error) => {
-    console.log(error);
-    console.log("Can't Sign In with Google");
-  };
+  // const googleFailure = (error) => {
+  //   console.log(error);
+  //   console.log("Can't Sign In with Google");
+  // };
 
   if (authMode === "signin") {
     return (
@@ -71,7 +71,7 @@ const Auth = () =>  {
         <form className="Auth-form" onSubmit={handleSubmit}>
           <div className="Auth-form-content">
             <h3 className="Auth-form-title">Sign In</h3>
-            <GoogleLogin
+            {/* <GoogleLogin
               clientId="630447126144-kr77ttoh02kjhn3c52b9galqertdtbcs.apps.googleusercontent.com"
               render={(renderProps) => (
                 <Button
@@ -89,7 +89,7 @@ const Auth = () =>  {
               onSuccess={googleSuccess}
               onFailure={googleFailure}
               cookiePolicy="single_host_origin"
-            />
+            /> */}
             <div className="text-center">
               Not registered yet?{" "}
               <span className="link-primary" onClick={changeAuthMode}>

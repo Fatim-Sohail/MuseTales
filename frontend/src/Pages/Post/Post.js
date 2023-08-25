@@ -17,11 +17,11 @@ import { likePost, deletePost } from "../../Actions/posts.js";
 import Clap from "../../components/Clap.js";
 import ClapOutline from "../../components/ClapOutline.js";
 
-
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const user = JSON.parse(localStorage.getItem('result'));
+  console.log("Post User: ", user);
 
   const Likes = () => {
     if (post.likes.length > 0) {
@@ -45,7 +45,7 @@ const Post = ({ post, setCurrentId }) => {
 
     return (
       <>
-          <ClapOutline/> &nbsp;Clap
+        <ClapOutline /> &nbsp;Clap
       </>
     );
   };
@@ -100,7 +100,7 @@ const Post = ({ post, setCurrentId }) => {
           // disabled={!user?.result}
           onClick={() => dispatch(likePost(post._id))}
         >
-          &nbsp; <Likes />
+          <Likes />
         </Button>
         <Button
           size="small"
@@ -110,8 +110,7 @@ const Post = ({ post, setCurrentId }) => {
           <DeleteIcon fontSize="small" /> Delete
         </Button>
         <Button size="small" color="primary">
-          <CommentRoundedIcon fontSize="small" />{" "}
-          &nbsp;Comment
+          <CommentRoundedIcon fontSize="small" /> &nbsp;Comment
         </Button>
       </CardActions>
     </Card>
