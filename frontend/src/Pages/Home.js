@@ -4,7 +4,9 @@ import Posts from './Posts/Posts';
 import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getPosts } from '../Actions/posts';
-// import CreateBlog from './CreateBlog/CreateBlog';
+import CreateBlog from './CreateBlog/CreateBlog';
+import Header from '../components/Header/Header.js';
+
 
 const Home = () => {
     const [currentId, setCurrentId] = useState(0);
@@ -13,9 +15,10 @@ const Home = () => {
 
   useEffect (() => {
     dispatch(getPosts());
-  }, [currentId, dispatch])
+  }, [])
   return (
     <div>
+      <Header/>
         <Grow in>
             <Container>
                 <Grid container justify="space-around" alignItems="stretch" spacing={3}>
