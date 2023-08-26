@@ -14,30 +14,33 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import useStyles from "./PostStyle.js";
 import { likePost, deletePost } from "../../Actions/posts.js";
-import Clap from "../../components/Clap.js";
-import ClapOutline from "../../components/ClapOutline.js";
+import Clap from '../../components/Clap/Clap.js'
+import ClapOutline from '../../components/Clap/ClapOutline'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandsClapping } from '@fortawesome/free-regular-svg-icons';
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const user = JSON.parse(localStorage.getItem('result'));
+  const user = localStorage.getItem("profile")?JSON.parse(localStorage.getItem("profile")) : null;
   console.log("Post User: ", user);
+  // console.log({post});
 
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find(
-        (like) => like === (user?.result?.googleId || user?.result?._id)
+        (like) => like === (user?.result?._id)
       ) ? (
         <>
-          <Clap fontSize="small" />
+          <Clap />
           &nbsp;
           {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
-            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+            : `${post.likes.length} clap${post.likes.length > 1 ? "s" : ""}`}
         </>
       ) : (
         <>
-          <ClapOutline fontSize="small" />
+          <ClapOutline/>
           &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
         </>
       );
@@ -66,6 +69,7 @@ const Post = ({ post, setCurrentId }) => {
           {moment(post.createdAt).fromNow()}
         </Typography>
       </div>
+      {user?.result?._id === post?.creator && (
       <div className={classes.overlay2}>
         <Button
           style={{ color: "white" }}
@@ -75,6 +79,7 @@ const Post = ({ post, setCurrentId }) => {
           <MoreHorizIcon fontSize="default" />
         </Button>
       </div>
+      )}
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary" component="h2">
           {post.tags.map((tag) => `#${tag} `)}
@@ -97,18 +102,21 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           size="small"
           color="primary"
-          // disabled={!user?.result}
+          disabled={!user?.result}
           onClick={() => dispatch(likePost(post._id))}
         >
           <Likes />
         </Button>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => dispatch(deletePost(post._id))}
-        >
-          <DeleteIcon fontSize="small" /> Delete
-        </Button>
+        {user?.result?._id === post?.creator && (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => dispatch(deletePost(post._id))}
+          >
+            <DeleteIcon fontSize="small" /> Delete
+          </Button>
+         )}
+
         <Button size="small" color="primary">
           <CommentRoundedIcon fontSize="small" /> &nbsp;Comment
         </Button>

@@ -6,40 +6,42 @@ import useStyles from './CreateBlogStyle.js';
 import { createPosts, updatePost } from '../../Actions/posts.js';
 // import { Link } from 'react-router-dom';
 
-const CreateBlog = () => {
+const CreateBlog = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
   // const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
-  // const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
+  const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
-  console.log(user);
+  // console.log(user);
 
-  // useEffect(() => {
-  //   if (post) setPostData(post);
-  // }, [post]);
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
 
   const clear = () => {
+    setCurrentId(0);
     setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (currentId === 0) {
+    if (currentId === 0) {
       dispatch(createPosts({ ...postData, name: user?.result?.name }));
       clear();
-    // } else {
-    //   dispatch(updatePost(currentId, postData));
-    //   clear();
-    // }
+    } else {
+      dispatch(updatePost(currentId, postData));
+      clear();
+    }
   };
 
   if (!user?. result ?. name) {
+    console.log("name", user);
     return (
       <Paper className={classes.paper}>
         <Typography variant="h6" align="center">
-          Please sign in to first.
+          Please sign in to your account first.
         </Typography>
 
       </Paper>
@@ -50,7 +52,7 @@ const CreateBlog = () => {
     <div className={classes.background}>
     <Paper className={classes.paper}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-      <Typography variant="h6" className={classes.title}>Create Your Tale</Typography>
+      <Typography variant="h6" className={classes.title}>{currentId ? `Editing "${post.title}"` : 'Create Your Tale'}</Typography>
         <TextField name="creator" variant="outlined" label="Creator" fullWidth value={postData.creator} onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
         <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
         <TextField name="message" variant="outlined" label="Message" fullWidth multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />

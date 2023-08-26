@@ -1,36 +1,49 @@
-import React from 'react'
-import { Container, Grow, Grid} from '@material-ui/core';
-import Posts from './Posts/Posts';
-import { useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
-import { getPosts } from '../Actions/posts';
-import CreateBlog from './CreateBlog/CreateBlog';
-import Header from '../components/Header/Header.js';
+import React from "react";
+import { Container, Grow, Grid } from "@material-ui/core";
+import Posts from "./Posts/Posts";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getPosts } from "../Actions/posts";
+import Header from "../components/Header/Header.js";
+import Paginate from "../components/Pagination";
 
-
-const Home = () => {
-    const [currentId, setCurrentId] = useState(0);
-  const dispatch = useDispatch();
-//   const classes = useStyles();
-
-  useEffect (() => {
-    dispatch(getPosts());
-  }, [])
-  return (
-    <div>
-      <Header/>
-        <Grow in>
-            <Container>
-                <Grid container justify="space-around" alignItems="stretch" spacing={3}>
-                    <Grid item xs={12} sm={10} alignItems="center">
-                        <Posts setCurrentId={setCurrentId} />
-                    </Grid>
-                    {/* <CreateBlog currentId={currentId} setCurrentId={setCurrentId} /> */}
-                </Grid>
-            </Container>
-        </Grow>
-    </div>
-  )
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
 }
 
-export default Home
+const Home = () => {
+  const [currentId, setCurrentId] = useState(0);
+  const dispatch = useDispatch();
+  const query = useQuery();
+  const page = query.get('page') || 1;
+  const searchQuery = query.get('searchQuery');
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, []);
+  return (
+    <div>
+      <Header />
+      <Grow in>
+        <Container maxWidth="xl">
+          <Grid
+            container
+            justify="space-around"
+            alignItems="stretch"
+            spacing={3}
+          >
+            <Grid item xs={12} sm={10} alignItems="center">
+              <Posts setCurrentId={setCurrentId} />
+            </Grid>
+          </Grid>
+          {/* {(!searchQuery && !tags.length) && ( */}
+            <Paginate page={page} />
+          {/* )} */}
+        </Container>
+      </Grow>
+    </div>
+  );
+};
+
+export default Home;

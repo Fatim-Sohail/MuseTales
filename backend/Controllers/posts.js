@@ -6,23 +6,46 @@ import PostMessage from '../models/postMessage.js';
 const router = express.Router();
 
 export const getPosts = async (req, res) => { 
+    const { page } = req.query;
     try {
-        const postMessages = await PostMessage.find();
+        const LIMIT = 6;
+        const startIndex = (Number(page) - 1) * LIMIT;
+        const total = await PostMessage.countDocuments({});
+        const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
                 
-        res.status(200).json(postMessages);
+        res.status(200).json({ data: posts, currentPage: Number(page), numberofPage: Math.ceil(total / LIMIT)});
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 }
 
-export const getPost = async (req, res) => { 
-    const { id } = req.params;
+// export const getPost = async (req, res) => { 
+//     const { id } = req.params;
 
-    try {
-        const post = await PostMessage.findById(id);
+//     try {
+//         const post = await PostMessage.findById(id);
         
-        res.status(200).json(post);
-    } catch (error) {
+//         res.status(200).json(post);
+//     } catch (error) {
+//         res.status(404).json({ message: error.message });
+//     }
+// }
+
+export const getPostsBySearch = async (req, res) => {
+    const { searchQuery, tags } = req.query;
+    console.log("GET POST")
+    try {
+        const title = new RegExp(searchQuery, "i");
+
+        if (tags || searchQuery) {
+            posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
+        } else {
+            posts = await PostMessage.find({ title });
+            console.log("No tags found");
+        }
+
+        res.json({ data: posts });
+    } catch (error) {    
         res.status(404).json({ message: error.message });
     }
 }

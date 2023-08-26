@@ -5,14 +5,16 @@ const API = axios.create({ baseURL: 'http://localhost:8080' })
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {
-        req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+        req.headers.authorization = `Bearer ${localStorage.getItem('profile')? JSON.parse(localStorage.getItem('profile')).token : null}`;
         console.log("src api: ");
     }
     console.log("src api: ", (req.headers.authorization));
     return req;
 })
 
-export const fetchPosts = () => API.get('/posts');
+export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
+console.log("fetch");
+export const fetchPostsBySearch = (searchQuery) => API.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`);
 export const createPost = (newPost) => API.post('/posts', newPost);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);

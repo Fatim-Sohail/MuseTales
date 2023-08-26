@@ -49,4 +49,7 @@ export default makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  clap: {
+    color: 'primary',
+  }
 });

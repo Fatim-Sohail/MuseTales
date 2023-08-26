@@ -1,11 +1,9 @@
 import jwt from "jsonwebtoken";
 
-const secret = 'test';
 
 const auth = async (req, res, next) => {
   try {
     if (!req.headers.authorization) {
-        // Handle case when authorization header is missing
         return res.status(401).json({ message: "Authorization header missing" });
       }
       
@@ -15,7 +13,7 @@ const auth = async (req, res, next) => {
     let decodedData;
 
     if (token && isCustomAuth) {      
-      decodedData = jwt.verify(token, secret);
+      decodedData = jwt.verify(token, 'test');
 
       req.userId = decodedData?.id;
     } else {
