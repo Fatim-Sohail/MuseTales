@@ -12,4 +12,8 @@ export const FETCH_POST = 'FETCH_POST';
 
 export const AUTH ='AUTH';
 export const LOGOUT = 'LOGOUT';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+
+export const SET_NUMBER_OF_PAGES = 'SET_NUMBER_OF_PAGES';
+
 export const AUTH_T = 'AUTH_T';

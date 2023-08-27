@@ -1,5 +1,5 @@
 import * as api from "../Api/index.js";
-import {AUTH, FETCH_ALL} from "../constants/actionTypes";
+import {AUTH, FETCH_ALL, UPDATE_PROFILE} from "../constants/actionTypes";
 
 export const signin = (formData, history) => async (dispatch) => {
   try {
@@ -8,9 +8,7 @@ export const signin = (formData, history) => async (dispatch) => {
     localStorage.setItem('profile', JSON.stringify(data ));
 
     console.log("Actions", data);
-    // dispatch(data);
-    // console.log("token.......", dispatch);
-    history("/");
+    history("/posts");
   } catch (error) {
     console.log(error);
   }
@@ -23,7 +21,22 @@ export const signup = (formData, history) => async (dispatch) => {
     dispatch(data);
     console.log("Signup: ");
 
-    history.push("/");
+    history.push("/posts");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const updateProfile = (formData) => async (dispatch) => {
+  console.log("formdata: " , formData);//
+  try {
+    const { data } = await api.updateProfile(formData); 
+    console.log("dataaa", data);
+
+    dispatch( {type: UPDATE_PROFILE, payload: data});
+
+    console.log("Profile updated:", data);
   } catch (error) {
     console.log(error);
   }

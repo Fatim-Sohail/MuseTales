@@ -1,6 +1,6 @@
-import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_POST, START_LOADING, END_LOADING, CREATE, UPDATE, DELETE, LIKE } from "../constants/actionTypes";
+import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_POST, SET_NUMBER_OF_PAGES , START_LOADING, END_LOADING, CREATE, UPDATE, DELETE, LIKE } from "../constants/actionTypes";
 
-export default  (state = {loading: true, posts: [] }, action) => {
+export default  (state = {loading: true, posts: [], numberOfPages: 1, }, action) => {
     switch (action.type) {
 
       case START_LOADING:
@@ -10,8 +10,14 @@ export default  (state = {loading: true, posts: [] }, action) => {
         return { ...state, loading: false }  
 
       case FETCH_ALL:
-        console.log("Fetch ALL POSTS");
-        return { ...state, posts: action.payload.data, currentPage: action.payload.currentPage, numberofPages: action.payload.numberOfPages};
+        return { ...state, posts: action.payload.data };
+
+      case SET_NUMBER_OF_PAGES:
+        return { ...state, numberOfPages: action.payload };
+
+      // case FETCH_ALL:
+      //   console.log("Fetch ALL POSTS");
+        // return { ...state, posts: action.payload.data, currentPage: action.payload.currentPage, numberofPages: action.payload.numberOfPages};
 
       case FETCH_BY_SEARCH:
         console.log("Fetch ALL POSTS BY SEARCH");

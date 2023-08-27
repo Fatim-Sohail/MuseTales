@@ -1,3 +1,4 @@
 .container {
     max-width: 1080px;
+    z-index: 1;
 }

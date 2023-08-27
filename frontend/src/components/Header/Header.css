@@ -93,20 +93,6 @@ strong {
   color: #812399;
 }
 
-.logout-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-  transition: color 0.3s ease;
-}
-
-.logout-btn:hover {
-  color: #e99f31;
-}
 
 /* No Auth Options */
 .noAuth_options {
@@ -264,53 +250,3 @@ strong {
 	}		
 }
 
-
-/* --------------------------- */
-
-.profile-popup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.profile-popup h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.profile-popup input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.profile-popup button {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.profile-popup button:hover {
-  background-color: #0056b3;
-}
-
-.profile-popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-}

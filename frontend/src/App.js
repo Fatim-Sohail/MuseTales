@@ -5,6 +5,7 @@ import Auth from "./Pages/Auth/Auth";
 import Home from "./Pages/Home";
 import BlogForm from "./Pages/BlogForm";
 import PostDetails from "./Pages/PostDetails/PostDetails";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   // const user = 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" component={() =><Navigate to='/posts' />} />
         <Route path="/posts" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/posts/search" element={<Home />} />
         <Route path="/posts/:id" element={<PostDetails />} /> // Post details page
         <Route path="/auth" element={<Auth />} />

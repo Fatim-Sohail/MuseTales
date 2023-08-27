@@ -44,3 +44,20 @@ export const signup = async (req, res) => {
     }
 }
 
+export const updateProfile = async (req, res) => {
+    const userId = req.userId;
+    console.log("updated...", userId);
+    const { email, name, interests, education } = req.body;
+    
+    try {
+        const updatedProfile = { email, name, interests, education, _id: userId };
+        await User.findByIdAndUpdate( userId, updatedProfile , { new: true } );
+        console.log("updated... profile");
+        console.log("updated... p", updatedProfile);
+  
+      res.status(200).json(updatedProfile);
+    } catch (error) {
+      res.status(500).json({ message: 'Profile update failed', error: error.message });
+    }
+  };
+

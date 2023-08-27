@@ -5,19 +5,41 @@ import PostMessage from '../models/postMessage.js';
 
 const router = express.Router();
 
-export const getPosts = async (req, res) => { 
+// export const getPosts = async (req, res) => { 
+//     const { page } = req.query;
+//     try {
+//         const LIMIT = 6;
+//         const startIndex = (Number(page) - 1) * LIMIT;
+//         const total = await PostMessage.countDocuments({});
+//         const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+                
+//         res.status(200).json({ data: posts, currentPage: Number(page), numberofPage: Math.ceil(total / LIMIT)});
+//     } catch (error) {
+//         res.status(404).json({ message: error.message });
+//     }
+// }
+
+export const getPosts = async (req, res) => {
     const { page } = req.query;
     try {
-        const LIMIT = 6;
-        const startIndex = (Number(page) - 1) * LIMIT;
-        const total = await PostMessage.countDocuments({});
-        const posts = await PostMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
-                
-        res.status(200).json({ data: posts, currentPage: Number(page), numberofPage: Math.ceil(total / LIMIT)});
+      const LIMIT = 6;
+      const startIndex = (Number(page) - 1) * LIMIT;
+  
+      // Get total number of posts
+      const total = await PostMessage.countDocuments({});
+  
+      // Get posts for the requested page
+      const posts = await PostMessage.find()
+        .sort({ _id: -1 })
+        .limit(LIMIT)
+        .skip(startIndex);
+  
+      res.status(200).json({ data: posts, total }); // Include the total in the response
     } catch (error) {
-        res.status(404).json({ message: error.message });
+      res.status(500).json({ message: 'Failed to fetch posts', error: error.message });
     }
-}
+  };
+  
 
 // export const getPost = async (req, res) => { 
 //     const { id } = req.params;

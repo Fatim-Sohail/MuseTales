@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Header.css";
 import ChipInput from "material-ui-chip-input";
 import { RiPencilFill } from "react-icons/ri";
-import { FaUserEdit } from "react-icons/fa";
 import { Avatar } from "@material-ui/core";
 import { BiLogOut } from "react-icons/bi";
 import { BsBookmarks } from "react-icons/bs";
@@ -26,12 +25,12 @@ const Header = () => {
       ? JSON.parse(localStorage.getItem("profile"))
       : null
   );
-  const [profilePopupOpen, setProfilePopupOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [tags, setTag] = useState([]);
+  const query = useQuery();
+  const searchQuery = query.get("searchQuery");
 
   const userToken = localStorage.getItem("Token");
-
 
   useEffect(() => {
     const token = user?.token;
@@ -62,18 +61,12 @@ const Header = () => {
   const searchPost = () => {
     if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
-      navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
+      navigate(
+        `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
+      );
     } else {
       navigate("/");
     }
-  };
-
-  const handleProfilePopupOpen = () => {
-    setProfilePopupOpen(true);
-  };
-
-  const handleProfilePopupClose = () => {
-    setProfilePopupOpen(false);
   };
 
   const logout = () => {
@@ -81,18 +74,7 @@ const Header = () => {
     localStorage.setItem("Token", "");
     localStorage.setItem("profile", "");
     navigate("/");
-
   };
-
-  const profilePopupContent = (
-    <div className="profile-popup">
-      <button className="logout-btn" onClick={logout}>
-        {" "}
-        <BiLogOut />
-        Logout{" "}
-      </button>
-    </div>
-  );
 
   return (
     <header>
@@ -116,7 +98,7 @@ const Header = () => {
             <ChipInput
               className="search-tags"
               placeholder="Search tags"
-              style={{ margin: "10px 0", padding:"0 15px"}}
+              style={{ margin: "10px 0", padding: "0 15px" }}
               value={tags}
               onAdd={(chip) => handleAdd(chip)}
               onDelete={(chip) => handleDelete(chip)}
@@ -128,36 +110,21 @@ const Header = () => {
           {userToken ? (
             <div className="auth_options">
               <Link className="addStory-link" to="/createblog">
-                {/* <CreateBlog currentId={currentId} setCurrentId={setCurrentId} /> */}
                 <RiPencilFill /> Add Tale
               </Link>
 
               <Link to="/readList" className="readList-link">
                 <BsBookmarks />
               </Link>
-              <div className="header-profile-wrapper">
                 <div className="sub-profile-wrap">
-                  <Avatar className="profile-link"  onClick={handleProfilePopupOpen}> {user?.result.name.charAt(0)}</Avatar>
-                  {/* <button>
-                    <FaUserEdit onClick={handleProfilePopupOpen} />
-                  </button> */}
-                  {/* <Link className="profile-link" to="/profile"> */}
-                  {/* <FaUserEdit onClick={handleProfilePopupOpen} /> */}
-                  {/* </Link> */}
-                  {profilePopupOpen && (
-                    <div
-                      className="profile-popup-overlay"
-                      onClick={handleProfilePopupClose}
-                    >
-                      {profilePopupContent}
-                    </div>
-                  )}
-                  {/* <button className="logout-btn">
-                    <BiLogOut /> Logout
-                  </button> */}
+                  <Link to="/profile">
+                    <Avatar className="profile-link">
+                      {" "}
+                      {user?.result.name.charAt(0)}
+                    </Avatar>
+                  </Link>
                 </div>
               </div>
-            </div>
           ) : (
             <div className="noAuth_options">
               <Link className="login-link" to="/auth">
