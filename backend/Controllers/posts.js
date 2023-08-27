@@ -41,21 +41,22 @@ export const getPosts = async (req, res) => {
   };
   
 
-// export const getPost = async (req, res) => { 
-//     const { id } = req.params;
+export const getPost = async (req, res) => { 
+    const { id } = req.params;
+    console.log("id = ", id);
 
-//     try {
-//         const post = await PostMessage.findById(id);
+    try {
+        const post = await PostMessage.findById(id);
         
-//         res.status(200).json(post);
-//     } catch (error) {
-//         res.status(404).json({ message: error.message });
-//     }
-// }
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 
 export const getPostsBySearch = async (req, res) => {
     const { searchQuery, tags } = req.query;
-    console.log("GET POST")
+    console.log("GET POST BY SEARCH", )
     try {
         const title = new RegExp(searchQuery, "i");
 

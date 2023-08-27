@@ -51,5 +51,9 @@ export default makeStyles({
   },
   clap: {
     color: 'primary',
-  }
+  },
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
+  },
 });

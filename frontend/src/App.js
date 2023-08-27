@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import BlogForm from "./Pages/BlogForm";
 import PostDetails from "./Pages/PostDetails/PostDetails";
 import Profile from "./components/Profile/Profile";
+import UpdateBlog from "./Pages/UpdateBlog";
 
 function App() {
   // const user = 
@@ -17,7 +18,8 @@ function App() {
         <Route path="/posts" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/posts/search" element={<Home />} />
-        <Route path="/posts/:id" element={<PostDetails />} /> // Post details page
+        <Route path="/posts/:id" element={<UpdateBlog />} />
+        <Route path="/posts/:id" element={<PostDetails />} /> 
         <Route path="/auth" element={<Auth />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/createblog" element={<BlogForm />} />        

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const CreateBlog = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
   // const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
-  const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
+  const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -28,14 +28,14 @@ const CreateBlog = ({ currentId, setCurrentId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (currentId === 0) {
-      dispatch(createPosts({ ...postData, name: user?.result?.name }));
+    if (currentId === 0) {
+      dispatch(createPosts({ ...postData, name: user?.result?.name }, navigate));
       clear();
-      navigate('/posts/');
-    // } else {
-      // dispatch(updatePost(currentId, postData));
-      // clear();
-    // }
+      // navigate('/posts/');
+    } else {
+      dispatch(updatePost(currentId, postData));
+      clear();
+    }
   };
 
   if (!user?. result ?. name) {

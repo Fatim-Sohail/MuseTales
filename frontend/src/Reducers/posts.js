@@ -21,10 +21,10 @@ export default  (state = {loading: true, posts: [], numberOfPages: 1, }, action)
 
       case FETCH_BY_SEARCH:
         console.log("Fetch ALL POSTS BY SEARCH");
-        return { ...state, posts: action.payload };
+        return { ...state, posts: action.payload.data };
 
-      // case FETCH_POST:
-      //   return { ...state, posts: action.payload.post };
+      case FETCH_POST:
+        return { ...state, posts: action.payload.post };
 
       case LIKE:
         return { ... state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post))};

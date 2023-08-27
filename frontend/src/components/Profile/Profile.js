@@ -33,6 +33,7 @@ const Profile = () => {
   const saveProfile = () => {
     dispatch(updateProfile(updatedUser));
     console.log("Updated user profile:", updatedUser);
+    navigate("/posts");
   };
 
   const logout = () => {
