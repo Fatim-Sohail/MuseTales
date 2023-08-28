@@ -73,6 +73,33 @@ export const getPostsBySearch = async (req, res) => {
     }
 }
 
+
+export const getLikedPosts = async (req, res) => {
+    try {
+      const { id } = req.params;
+      
+      const likedPosts = await PostMessage.find({ likes: { $in: [id] } });
+      
+      res.status(200).json({ data: likedPosts });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to fetch liked posts', error: error.message });
+    }
+  };
+  
+
+export const commentPost = async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    const post = await PostMessage.findById(id);
+
+    post.comments.push(value);
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+
+    res.json(updatedPost);
+};
+
 export const createPost = async (req, res) => {
     const post = req.body;
     // const { title, message, selectedFile, creator, tags } = req.body;

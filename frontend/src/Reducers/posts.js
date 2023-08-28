@@ -1,6 +1,6 @@
-import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_POST, SET_NUMBER_OF_PAGES , START_LOADING, END_LOADING, CREATE, UPDATE, DELETE, LIKE } from "../constants/actionTypes";
+import { FETCH_ALL, FETCH_BY_SEARCH, FETCH_POST, FETCH_LIKED_POSTS, SET_NUMBER_OF_PAGES , START_LOADING, END_LOADING, CREATE, UPDATE, DELETE, LIKE } from "../constants/actionTypes";
 
-export default  (state = {loading: true, posts: [], numberOfPages: 1, }, action) => {
+export default  (state = {loading: true, posts: [], numberOfPages: 1, likedPosts: [] }, action) => {
     switch (action.type) {
 
       case START_LOADING:
@@ -25,6 +25,9 @@ export default  (state = {loading: true, posts: [], numberOfPages: 1, }, action)
 
       case FETCH_POST:
         return { ...state, posts: action.payload.post };
+
+      case FETCH_LIKED_POSTS:
+        return {...state, likedPosts: action.payload.data };
 
       case LIKE:
         return { ... state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post))};

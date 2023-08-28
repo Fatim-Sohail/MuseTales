@@ -9,4 +9,15 @@ export default makeStyles(() => ({
     alignItems: 'center',
     alignSelf: 'center',
   },
+  commentsOuterContainer: {
+    display: 'flex',
+    flexDirection: 'column', 
+    marginLeft: '20px',
+    maxWidth: '1000px',
+  },
+  InnerContainer: {
+    // height: '200px',
+    overflowY: 'auto',
+    marginBottom: '10px',
+  },
 }));

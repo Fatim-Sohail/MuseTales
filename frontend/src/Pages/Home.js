@@ -22,6 +22,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, []);
+  console.log(searchQuery);
+
   return (
     <div>
       <Header />

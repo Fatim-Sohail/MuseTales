@@ -52,5 +52,8 @@ export default makeStyles((theme) => ({
     fontSize: '26px',
     marginLeft: '30px',
     // marginTop: '60px',
+  },
+  ckeditor__editable_inline: {
+    minHeight: '200px',
   }
 }));

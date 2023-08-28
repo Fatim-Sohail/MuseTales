@@ -3,7 +3,6 @@ import "./Header.css";
 import ChipInput from "material-ui-chip-input";
 import { RiPencilFill } from "react-icons/ri";
 import { Avatar } from "@material-ui/core";
-import { BiLogOut } from "react-icons/bi";
 import { BsBookmarks } from "react-icons/bs";
 import { BsSearch } from "react-icons/bs";
 import { getPostsBySearch } from "../../Actions/posts";
@@ -61,10 +60,12 @@ const Header = () => {
   const searchPost = () => {
     if (search.trim() || tags) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
+      console.log('Search result:', `${tags}`);
       navigate(
         `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
       );
     } else {
+      console.log('No posts found!');
       navigate("/");
     }
   };
@@ -113,7 +114,7 @@ const Header = () => {
                 <RiPencilFill /> Add Tale
               </Link>
 
-              <Link to="/readList" className="readList-link">
+              <Link to="/likedposts" className="readList-link">
                 <BsBookmarks />
               </Link>
                 <div className="sub-profile-wrap">

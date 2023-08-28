@@ -26,7 +26,7 @@ const Post = ({ post, setCurrentId }) => {
   const user = localStorage.getItem("profile")
     ? JSON.parse(localStorage.getItem("profile"))
     : null;
-  console.log("Post User: ", user);
+  // console.log("Post User: ", user);
   // console.log({post});
 
   const openEditPage = (e) => {
@@ -39,6 +39,7 @@ const Post = ({ post, setCurrentId }) => {
 
   const Likes = () => {
     if (post.likes.length > 0) {
+      console.log("LIKED USER", user.result._id);
       return post.likes.find((like) => like === user?.result?._id) ? (
         <>
           <Clap />
@@ -54,13 +55,14 @@ const Post = ({ post, setCurrentId }) => {
         </>
       );
     }
-
+  
     return (
       <>
         <ClapOutline /> &nbsp;Clap
       </>
     );
   };
+  
 
   return (
     <Card className={classes.card} raised elevation={6}>
@@ -69,7 +71,7 @@ const Post = ({ post, setCurrentId }) => {
           className={classes.media}
           image={
             post.selectedFile ||
-            "https://i.pinimg.com/564x/6a/9a/8b/6a9a8bc2e11be473e4d8f50cbfbf010e.jpg"
+            "https://i.pinimg.com/236x/73/44/b4/7344b44f95ade5a17ad4be7e3ec42938.jpg"
           }
           title={post.title}
         />
@@ -135,8 +137,8 @@ const Post = ({ post, setCurrentId }) => {
             <DeleteIcon fontSize="small" /> Delete
           </Button>
         )}
-
-        <Button size="small" color="primary">
+{/* to={`/posts/${post._id}`} */}
+        <Button size="small" color="primary" component={Link} to={`/posts/${post._id}`} >
           <CommentRoundedIcon fontSize="small" /> &nbsp;Comment
         </Button>
       </CardActions>

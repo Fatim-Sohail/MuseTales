@@ -1,5 +1,5 @@
 import * as api from "../Api/index.js";
-import { FETCH_ALL, FETCH_POST, START_LOADING, END_LOADING, SET_NUMBER_OF_PAGES , FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE } from "../constants/actionTypes";
+import { FETCH_ALL, FETCH_POST, FETCH_LIKED_POSTS,  START_LOADING, END_LOADING, SET_NUMBER_OF_PAGES , FETCH_BY_SEARCH, CREATE, UPDATE, DELETE, LIKE } from "../constants/actionTypes";
 import { AUTH } from "../constants/actionTypes";
 
 export const getPost = (id) => async (dispatch) => {
@@ -52,7 +52,8 @@ export const createPosts = (post, navigate) => async (dispatch) => {
     dispatch({ type: START_LOADING });
     const { data } = await api.createPost(post);
     console.log("created post", post);
-    navigate(`./${data._id}`);
+    // navigate(`./${data._id}`);
+    navigate('/posts');
     dispatch({ type: CREATE, payload: data });
   } catch (error) {
     console.log(error);
@@ -82,6 +83,25 @@ export const likePost = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const commentPost = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.comment(value, id);
+    console.log("comment data", data);
+  } catch (error) {
+    console.log(error.message);
+  };
+};
+
+export const fetchLikedPosts = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchLikedPosts(id); 
+    dispatch({ type: FETCH_LIKED_POSTS, payload: data });
+  } catch (error) {
+    console.error("Error fetching liked posts:", error);
+  }
+};
+
 
 export const deletePost = (id) => async (dispatch) => {
   try {

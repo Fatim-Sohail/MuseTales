@@ -5,6 +5,7 @@ import moment from 'moment';
 import { useParams, useNavigate } from 'react-router-dom';
 import useStyles from './styles';
 import { getPost, getPostsBySearch } from '../../Actions/posts';
+import Comment from '../../components/Comment';
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -47,13 +48,11 @@ const PostDetails = () => {
           <Typography variant="h6">Created by: {post.name}</Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
-          <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1"><strong>Comments - coming soon!</strong></Typography>
+          <Typography variant="body1"><Comment post={post} /></Typography>
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>
-          <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+          <img className={classes.media} src={post.selectedFile || 'https://i.pinimg.com/236x/56/f7/f0/56f7f072ba99ab45bacd096820f7e44e.jpg'} alt={post.title} />
         </div>
       </div>
       {!!recommendedPosts.length && (
